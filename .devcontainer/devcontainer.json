@@ -21,6 +21,8 @@
         "editor.formatOnSave": true
       },
       "extensions": [
+        // Linting
+        "dbaeumer.vscode-eslint",
         // Formatting
         "esbenp.prettier-vscode",
         // Various
