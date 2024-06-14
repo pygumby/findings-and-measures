@@ -9,12 +9,13 @@ const CreateFindingForm = ({ currentUser, createFinding }) => {
   const handleFormSubmit = (e) => {
     e.preventDefault()
 
+    const timestamp = Date.now()
     createFinding({
+      id: timestamp,
+      changelog: [{ timestamp, username: currentUser }],
       summary,
       description,
       measures,
-      timestamp: Date.now(),
-      authors: [currentUser],
     })
 
     setSummary('')

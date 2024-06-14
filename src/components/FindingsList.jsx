@@ -1,13 +1,21 @@
 // Custom
 import FindingItem from './FindingItem'
 
-const FindingsList = ({ findings }) => {
+const FindingsList = ({ findings, deleteFinding }) => {
   return (
     <div>
       {findings
-        .sort((a, b) => b.timestamp - a.timestamp)
+        .sort(
+          (a, b) =>
+            b.changelog[b.changelog.length - 1].timestamp -
+            a.changelog[b.changelog.length - 1].timestamp
+        )
         .map((finding) => (
-          <FindingItem key={finding.timestamp} finding={finding} />
+          <FindingItem
+            key={finding.id}
+            finding={finding}
+            deleteFinding={deleteFinding}
+          />
         ))}
     </div>
   )

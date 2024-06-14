@@ -28,6 +28,10 @@ function App() {
     setFindings((prevState) => [...prevState, finding])
   }
 
+  const deleteFinding = (id) => {
+    setFindings((prevState) => prevState.filter((finding) => finding.id !== id))
+  }
+
   return (
     <div>
       <h1>Findings & Measures</h1>
@@ -47,7 +51,7 @@ function App() {
             currentUser={username}
             createFinding={createFinding}
           />
-          <FindingsList findings={findings} />
+          <FindingsList findings={findings} deleteFinding={deleteFinding} />
         </div>
       )}
     </div>
