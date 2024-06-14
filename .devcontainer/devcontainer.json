@@ -1,0 +1,32 @@
+{
+  "name": "javascript-node",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-in-docker": {}
+  },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        // Indentation
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.detectIndentation": false,
+        // Ruler
+        "editor.rulers": [100],
+        // Font
+        "editor.fontFamily": "JetBrains Mono",
+        "editor.fontLigatures": true,
+        // Formatting
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true
+      },
+      "extensions": [
+        // Formatting
+        "esbenp.prettier-vscode",
+        // Various
+        "GitHub.copilot"
+      ]
+    }
+  }
+  // "postCreateCommand": "bash .devcontainer/post-create.sh"
+}
