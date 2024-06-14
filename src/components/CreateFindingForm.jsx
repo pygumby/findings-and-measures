@@ -2,32 +2,48 @@
 import { useState } from 'react'
 
 const CreateFindingForm = ({ currentUser, createFinding }) => {
+  const [summary, setSummary] = useState('')
   const [description, setDescription] = useState('')
+  const [measures, setMeasures] = useState('')
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
 
-    const date = Date.now()
     createFinding({
-      id: date,
-      createdAt: date,
-      createdBy: currentUser,
-      lastEditedAt: date,
-      lastEditedBy: currentUser,
+      summary,
       description,
+      measures,
+      timestamp: Date.now(),
+      authors: [currentUser],
     })
 
+    setSummary('')
     setDescription('')
+    setMeasures('')
   }
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <label htmlFor='description'>Description</label>
+      <label htmlFor='summary'>Summary*</label>
+      <input
+        type='text'
+        name='summary'
+        value={summary}
+        onInput={(e) => setSummary(e.target.value)}
+        required
+      />
+      <label htmlFor='description'>Description*</label>
       <textarea
         name='description'
         value={description}
         onInput={(e) => setDescription(e.target.value)}
         required
+      />
+      <label htmlFor='measures'>Measures</label>
+      <textarea
+        name='measures'
+        value={measures}
+        onInput={(e) => setMeasures(e.target.value)}
       />
       <button type='submit'>Create</button>
     </form>

@@ -4,6 +4,7 @@ import { useState } from 'react'
 // Custom
 import LoginForm from './components/LoginForm'
 import CreateFindingForm from './components/CreateFindingForm'
+import FindingsList from './components/FindingsList'
 
 function App() {
   const [username, setUsername] = useState(null)
@@ -41,10 +42,13 @@ function App() {
       )}
 
       {username && (
-        <CreateFindingForm
-          currentUser={username}
-          createFinding={createFinding}
-        />
+        <div>
+          <CreateFindingForm
+            currentUser={username}
+            createFinding={createFinding}
+          />
+          <FindingsList findings={findings} />
+        </div>
       )}
     </div>
   )
