@@ -3,9 +3,11 @@ import { useState } from 'react'
 
 // Custom
 import LoginForm from './components/LoginForm'
+import CreateFindingForm from './components/CreateFindingForm'
 
 function App() {
   const [username, setUsername] = useState(null)
+  const [findings, setFindings] = useState([])
 
   const login = (username, password) => {
     if (username === 'Alice' && password === '1234') {
@@ -21,9 +23,14 @@ function App() {
     setUsername(null)
   }
 
+  const createFinding = (finding) => {
+    setFindings((prevState) => [...prevState, finding])
+  }
+
   return (
     <div>
       <h1>Findings & Measures</h1>
+
       {username ? (
         <div>
           <p>Logged in as {username}.</p>
@@ -31,6 +38,13 @@ function App() {
         </div>
       ) : (
         <LoginForm login={login} />
+      )}
+
+      {username && (
+        <CreateFindingForm
+          currentUser={username}
+          createFinding={createFinding}
+        />
       )}
     </div>
   )
