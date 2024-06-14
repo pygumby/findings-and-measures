@@ -1,0 +1,30 @@
+{
+  // Font
+  "editor.fontFamily": "JetBrains Mono, Monaco, Menlo, monospace",
+  "terminal.integrated.fontFamily": "JetBrains Mono, Monaco, Menlo, monospace",
+  "editor.fontLigatures": true,
+
+  // Formatting
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+
+  // Indentation
+  "editor.detectIndentation": false,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+
+  // Line length
+  "editor.rulers": [80],
+  "editor.wordWrap": "off",
+  "[markdown]": {
+    "editor.wordWrap": "off"
+  },
+
+  // Whitespace
+  "editor.renderWhitespace": "boundary",
+
+  // Various
+  "explorer.sortOrder": "type"
+}

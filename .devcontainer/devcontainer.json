@@ -6,20 +6,6 @@
   },
   "customizations": {
     "vscode": {
-      "settings": {
-        // Indentation
-        "editor.insertSpaces": true,
-        "editor.tabSize": 2,
-        "editor.detectIndentation": false,
-        // Ruler
-        "editor.rulers": [80],
-        // Font
-        "editor.fontFamily": "JetBrains Mono",
-        "editor.fontLigatures": true,
-        // Formatting
-        "editor.defaultFormatter": "esbenp.prettier-vscode",
-        "editor.formatOnSave": true
-      },
       "extensions": [
         // Linting
         "dbaeumer.vscode-eslint",
