@@ -1,7 +1,7 @@
 // Custom
 import { getDateString } from '../util/helperFunctions'
 
-const FindingItem = ({ finding, deleteFinding }) => {
+const FindingItem = ({ finding, setFindingBeingUpdated, deleteFinding }) => {
   return (
     <div>
       <ul>
@@ -11,14 +11,17 @@ const FindingItem = ({ finding, deleteFinding }) => {
         <li>
           Changelog:
           <ul>
-            {finding.changelog.map((change) => (
-              <li key={change['timestamp']}>
-                {getDateString(change['timestamp'])}, {change['username']}
-              </li>
-            ))}
+            {finding.changelog
+              .sort((a, b) => b.timestamp - a.timestamp)
+              .map((change) => (
+                <li key={change['timestamp']}>
+                  {getDateString(change['timestamp'])}, {change['username']}
+                </li>
+              ))}
           </ul>
         </li>
       </ul>
+      <button onClick={() => setFindingBeingUpdated(finding)}>Update</button>
       <button onClick={() => deleteFinding(finding.id)}>Delete</button>
     </div>
   )
