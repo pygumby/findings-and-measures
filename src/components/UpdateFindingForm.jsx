@@ -2,7 +2,7 @@
 import { useState } from 'react'
 
 const UpdateFindingForm = ({
-  currentUser,
+  currentUsername,
   findingBeingUpdated,
   updateFinding,
 }) => {
@@ -20,7 +20,7 @@ const UpdateFindingForm = ({
       id: findingBeingUpdated.id,
       changelog: findingBeingUpdated.changelog.concat({
         timestamp,
-        username: currentUser,
+        username: currentUsername,
       }),
       summary,
       description,

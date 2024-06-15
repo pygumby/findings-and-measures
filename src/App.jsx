@@ -6,24 +6,29 @@ import LoginForm from './components/LoginForm'
 import CreateFindingForm from './components/CreateFindingForm'
 import UpdateFindingForm from './components/UpdateFindingForm'
 import FindingsList from './components/FindingsList'
+import useLocalStorage from './hooks/useLocalStorage'
 
 function App() {
-  const [username, setUsername] = useState(null)
-  const [findings, setFindings] = useState([])
+  const [findings, setFindings] = useLocalStorage(
+    'findings-and-measures.findings',
+    []
+  )
+
+  const [currentUsername, setCurrentUsername] = useState(null)
   const [findingBeingUpdated, setFindingBeingUpdated] = useState(null)
 
   const login = (username, password) => {
     if (username === 'Alice' && password === '1234') {
-      setUsername(username)
+      setCurrentUsername(username)
     } else if (username === 'Bob' && password === '5678') {
-      setUsername(username)
+      setCurrentUsername(username)
     } else {
       alert('Invalid credentials')
     }
   }
 
   const logout = () => {
-    setUsername(null)
+    setCurrentUsername(null)
   }
 
   const createFinding = (finding) => {
@@ -52,25 +57,25 @@ function App() {
     <div>
       <h1>Findings & Measures</h1>
 
-      {username ? (
+      {currentUsername ? (
         <div>
-          <p>Logged in as {username}.</p>
+          <p>Logged in as {currentUsername}.</p>
           <button onClick={logout}>Logout</button>
         </div>
       ) : (
         <LoginForm login={login} />
       )}
 
-      {username && (
+      {currentUsername && (
         <div>
           <CreateFindingForm
-            currentUser={username}
+            currentUsername={currentUsername}
             createFinding={createFinding}
           />
 
           {findingBeingUpdated && (
             <UpdateFindingForm
-              currentUser={username}
+              currentUsername={currentUsername}
               findingBeingUpdated={findingBeingUpdated}
               updateFinding={updateFinding}
             />

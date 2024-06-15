@@ -1,7 +1,7 @@
 // React
 import { useState } from 'react'
 
-const CreateFindingForm = ({ currentUser, createFinding }) => {
+const CreateFindingForm = ({ currentUsername, createFinding }) => {
   const [summary, setSummary] = useState('')
   const [description, setDescription] = useState('')
   const [measures, setMeasures] = useState('')
@@ -12,7 +12,7 @@ const CreateFindingForm = ({ currentUser, createFinding }) => {
     const timestamp = Date.now()
     createFinding({
       id: timestamp,
-      changelog: [{ timestamp, username: currentUser }],
+      changelog: [{ timestamp, username: currentUsername }],
       summary,
       description,
       measures,
