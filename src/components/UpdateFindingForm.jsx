@@ -18,10 +18,13 @@ const UpdateFindingForm = ({
     const timestamp = Date.now()
     updateFinding({
       id: findingBeingUpdated.id,
-      changelog: findingBeingUpdated.changelog.concat({
-        timestamp,
-        username: currentUsername,
-      }),
+      changelog: [
+        ...findingBeingUpdated.changelog,
+        {
+          timestamp,
+          username: currentUsername,
+        },
+      ],
       summary,
       description,
       measures,

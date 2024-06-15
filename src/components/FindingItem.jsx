@@ -1,10 +1,24 @@
 // Custom
 import { getDateString } from '../util/helperFunctions'
 
-const FindingItem = ({ finding, setFindingBeingUpdated, deleteFinding }) => {
+const FindingItem = ({
+  currentUsername,
+  finding,
+  setFindingBeingUpdated,
+  deleteFinding,
+}) => {
   return (
-    <div>
+    <div id={finding.id}>
       <ul>
+        {finding.changelog.some(
+          (change) => change.username === currentUsername
+        ) &&
+        finding.changelog[finding.changelog.length - 1].username !==
+          currentUsername ? (
+          <li>This finding has been updated since you last worked on it.</li>
+        ) : (
+          ''
+        )}
         <li>Summary: {finding.summary}</li>
         <li>Description: {finding.description}</li>
         <li>Measures: {finding.measures}</li>
@@ -12,7 +26,7 @@ const FindingItem = ({ finding, setFindingBeingUpdated, deleteFinding }) => {
           Changelog:
           <ul>
             {finding.changelog
-              .sort((a, b) => b.timestamp - a.timestamp)
+              .toSorted((a, b) => b.timestamp - a.timestamp)
               .map((change) => (
                 <li key={change['timestamp']}>
                   {getDateString(change['timestamp'])}, {change['username']}

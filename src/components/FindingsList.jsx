@@ -2,6 +2,7 @@
 import FindingItem from './FindingItem'
 
 const FindingsList = ({
+  currentUsername,
   findings,
   setFindingBeingUpdated,
   updateFinding,
@@ -18,6 +19,7 @@ const FindingsList = ({
         .map((finding) => (
           <FindingItem
             key={finding.id}
+            currentUsername={currentUsername}
             finding={finding}
             setFindingBeingUpdated={setFindingBeingUpdated}
             updateFinding={updateFinding}

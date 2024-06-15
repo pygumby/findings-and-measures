@@ -53,6 +53,14 @@ function App() {
     setFindings((prevState) => prevState.filter((finding) => finding.id !== id))
   }
 
+  const findingsUpdatedByAnotherUser = findings.filter((finding) => {
+    const changelog = finding.changelog
+    return (
+      changelog.some((change) => change.username === currentUsername) &&
+      changelog[changelog.length - 1].username !== currentUsername
+    )
+  })
+
   return (
     <div>
       <h1>Findings & Measures</h1>
@@ -81,7 +89,24 @@ function App() {
             />
           )}
 
+          {findingsUpdatedByAnotherUser.length > 0 && (
+            <div>
+              <p>
+                The following findings have been updated since you last worked
+                on them:
+              </p>
+              <ul>
+                {findingsUpdatedByAnotherUser.map((finding) => (
+                  <li key={finding.id}>
+                    <a href={`#${finding.id}`}>{finding.summary}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           <FindingsList
+            currentUsername={currentUsername}
             findings={findings}
             setFindingBeingUpdated={setFindingBeingUpdated}
             updateFinding={updateFinding}
