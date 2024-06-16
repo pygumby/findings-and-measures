@@ -25,7 +25,7 @@ const CreateFindingForm = ({ currentUsername, createFinding }) => {
 
   return (
     <div className='card text-center mb-3'>
-      <h6 className='card-header p-3'>Create a new finding</h6>
+      <h6 className='card-header p-3'>Create new finding</h6>
       <div className='card-body'>
         <form onSubmit={handleFormSubmit}>
           <div className='form-floating mb-3'>

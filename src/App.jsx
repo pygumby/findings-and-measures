@@ -64,7 +64,7 @@ function App() {
 
   return (
     <div className='container'>
-      <nav className='navbar navbar-light bg-light mb-2'>
+      <nav className='navbar navbar-light bg-light mb-3'>
         <div className='container-fluid'>
           <a className='navbar-brand' href='#'>
             <img
@@ -112,8 +112,8 @@ function App() {
               role='alert'
             >
               <div className='mb-2'>
-                <strong>Stay in the loop!</strong> These findings have
-                been updated since you last worked on them:
+                <strong>Stay in the loop!</strong> These findings have been
+                updated since you last worked on them:
               </div>
               <ul className='mb-0'>
                 {findingsUpdatedByAnotherUser.map((finding) => {
