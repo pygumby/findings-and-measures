@@ -1,11 +1,8 @@
 FROM node:22-slim
 
-WORKDIR '/app/'
+WORKDIR /app
 
-COPY public/ /app/public
-COPY src/ /app/src
-COPY index.html /app/
-COPY package.json /app/
+COPY . .
 
 RUN npm install -g pnpm && pnpm install
 
