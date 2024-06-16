@@ -138,7 +138,7 @@ function App() {
 
       <footer className='footer my-3'>
         <span className='text-muted'>
-          Built for demonstational purposes by Lucas Konstantin Bärenfänger.
+          Built for demonstrational purposes by Lucas Konstantin Bärenfänger.
         </span>
       </footer>
     </div>
