@@ -4,19 +4,16 @@ import { useState } from 'react'
 // Custom
 import LoginForm from './components/LoginForm'
 import CreateFindingForm from './components/CreateFindingForm'
-import UpdateFindingForm from './components/UpdateFindingForm'
 import FindingsList from './components/FindingsList'
 import useLocalStorage from './hooks/useLocalStorage'
 import { getDateString, getTimeString } from './util/helperFunctions'
 
 function App() {
+  const [currentUsername, setCurrentUsername] = useState(null)
   const [findings, setFindings] = useLocalStorage(
     'findings-and-measures.findings',
     []
   )
-
-  const [currentUsername, setCurrentUsername] = useState(null)
-  const [findingBeingUpdated, setFindingBeingUpdated] = useState(null)
 
   const login = (username, password) => {
     if (username === 'Alice' && password === '1234') {
@@ -46,8 +43,6 @@ function App() {
         }
       })
     )
-
-    setFindingBeingUpdated(null)
   }
 
   const deleteFinding = (id) => {
@@ -98,14 +93,6 @@ function App() {
             createFinding={createFinding}
           />
 
-          {findingBeingUpdated && (
-            <UpdateFindingForm
-              currentUsername={currentUsername}
-              findingBeingUpdated={findingBeingUpdated}
-              updateFinding={updateFinding}
-            />
-          )}
-
           {findingsUpdatedByAnotherUser.length > 0 && (
             <div
               className='alert alert-primary alert-dismissible fade show'
@@ -143,7 +130,6 @@ function App() {
           <FindingsList
             currentUsername={currentUsername}
             findings={findings}
-            setFindingBeingUpdated={setFindingBeingUpdated}
             updateFinding={updateFinding}
             deleteFinding={deleteFinding}
           />

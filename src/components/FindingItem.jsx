@@ -1,10 +1,11 @@
 // Custom
+import UpdateFindingForm from './UpdateFindingForm'
 import { getDateString, getTimeString } from '../util/helperFunctions'
 
 const FindingItem = ({
   currentUsername,
   finding,
-  setFindingBeingUpdated,
+  updateFinding,
   deleteFinding,
 }) => {
   return (
@@ -44,30 +45,33 @@ const FindingItem = ({
             <dd className='col-sm-9'>{finding.description}</dd>
             <dt className='col-sm-3'>Measures</dt>
             <dd className='col-sm-9'>{finding.measures}</dd>
-            <dt className='col-sm-3'>Changelog</dt>
-            <dd className='col-sm-9'>
-              <ul>
+            <dt className='col-sm-3 text-muted'>Changelog</dt>
+            <dd className='col-sm-9 text-muted'>
+              <p>
                 {finding.changelog
                   .toSorted((a, b) => b.timestamp - a.timestamp)
                   .map((change) => (
-                    <li key={change['timestamp']}>
+                    <span className='font-monospace' key={change['timestamp']}>
                       {getDateString(change['timestamp'])}{' '}
                       {getTimeString(change['timestamp'])}, {change['username']}
-                    </li>
+                      <br />
+                    </span>
                   ))}
-              </ul>
+              </p>
             </dd>
           </dl>
           <div className='d-grid'>
             <button
               className='btn btn-light mb-2'
-              onClick={() => setFindingBeingUpdated(finding)}
+              data-bs-toggle='modal'
+              data-bs-target={`#update-${finding.id}-modal`}
             >
               Update
             </button>
             <button
               className='btn btn-light mb-2'
-              onClick={() => deleteFinding(finding.id)}
+              data-bs-toggle='modal'
+              data-bs-target={`#delete-${finding.id}-modal`}
             >
               Delete
             </button>
@@ -77,6 +81,60 @@ const FindingItem = ({
             <button className='btn btn-light' disabled>
               Send .docx to DARWIN
             </button>
+          </div>
+          <UpdateFindingForm
+            currentUsername={currentUsername}
+            finding={finding}
+            updateFinding={updateFinding}
+          />
+        </div>
+      </div>
+      <div
+        className='modal fade'
+        id={`delete-${finding.id}-modal`}
+        tabIndex='-1'
+        aria-labelledby={`delete-${finding.id}-modal-label`}
+        aria-hidden='true'
+      >
+        <div className='modal-dialog'>
+          <div className='modal-content'>
+            <div className='modal-header'>
+              <h5
+                className='modal-title'
+                id={`delete-${finding.id}-modal-label`}
+              >
+                Delete exiting finding
+              </h5>
+              <button
+                type='button'
+                className='btn-close'
+                data-bs-dismiss='modal'
+                aria-label='Close'
+              ></button>
+            </div>
+            <div className='modal-body'>
+              <p>Are you sure you want to delete this finding?</p>
+              <p>
+                <strong>{finding.summary}</strong>
+              </p>
+            </div>
+            <div className='modal-footer'>
+              <button
+                type='button'
+                className='btn btn-secondary'
+                data-bs-dismiss='modal'
+              >
+                Cancel
+              </button>
+              <button
+                type='button'
+                className='btn btn-primary'
+                data-bs-dismiss='modal'
+                onClick={() => deleteFinding(finding.id)}
+              >
+                Delete
+              </button>
+            </div>
           </div>
         </div>
       </div>

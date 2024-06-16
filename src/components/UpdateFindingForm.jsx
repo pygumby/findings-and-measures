@@ -1,66 +1,125 @@
 // React
 import { useState } from 'react'
 
-const UpdateFindingForm = ({
-  currentUsername,
-  findingBeingUpdated,
-  updateFinding,
-}) => {
-  const [summary, setSummary] = useState(findingBeingUpdated.summary)
-  const [description, setDescription] = useState(
-    findingBeingUpdated.description
-  )
-  const [measures, setMeasures] = useState(findingBeingUpdated.measures)
+const UpdateFindingForm = ({ currentUsername, finding, updateFinding }) => {
+  const [summary, setSummary] = useState(finding.summary)
+  const [description, setDescription] = useState(finding.description)
+  const [measures, setMeasures] = useState(finding.measures)
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
 
     const timestamp = Date.now()
     updateFinding({
-      id: findingBeingUpdated.id,
+      id: finding.id,
       changelog: [
-        ...findingBeingUpdated.changelog,
+        ...finding.changelog,
         {
           timestamp,
           username: currentUsername,
         },
       ],
-      summary,
-      description,
-      measures,
+      summary: summary.trim() === '' ? 'tbd' : summary,
+      description: description.trim() === '' ? 'tbd' : description,
+      measures: measures.trim() === '' ? 'tbd' : measures,
     })
+  }
 
-    setSummary('')
-    setDescription('')
-    setMeasures('')
+  const handleFormReset = (e) => {
+    e.preventDefault()
+
+    setSummary(finding.summary)
+    setDescription(finding.description)
+    setMeasures(finding.measures)
   }
 
   return (
-    <form onSubmit={handleFormSubmit}>
-      <label htmlFor='summary'>Summary</label>
-      <input
-        type='text'
-        name='summary'
-        value={summary}
-        onInput={(e) => setSummary(e.target.value)}
-        required
-      />
-      <label htmlFor='description'>Description</label>
-      <textarea
-        name='description'
-        value={description}
-        onInput={(e) => setDescription(e.target.value)}
-        required
-      />
-      <label htmlFor='measures'>Measures</label>
-      <textarea
-        name='measures'
-        value={measures}
-        onInput={(e) => setMeasures(e.target.value)}
-        required
-      />
-      <button type='submit'>Update</button>
-    </form>
+    <div
+      className='modal fade'
+      id={`update-${finding.id}-modal`}
+      tabIndex='-1'
+      aria-labelledby={`update-${finding.id}-modal-label`}
+      aria-hidden='true'
+    >
+      <div className='modal-dialog'>
+        <div className='modal-content'>
+          <form onSubmit={handleFormSubmit}>
+            <div className='modal-header'>
+              <h5
+                className='modal-title'
+                id={`update-${finding.id}-modal-label`}
+              >
+                Update existing finding
+              </h5>
+              <button
+                type='button'
+                className='btn-close'
+                data-bs-dismiss='modal'
+                aria-label='Close'
+              ></button>
+            </div>
+            <div className='modal-body'>
+              <div className='form-floating mb-3'>
+                <input
+                  className='form-control'
+                  id='floatingSummary'
+                  placeholder=''
+                  type='text'
+                  value={summary}
+                  onInput={(e) => setSummary(e.target.value)}
+                  required
+                />
+                <label htmlFor='floatingSummary'>Summary</label>
+              </div>
+              <div className='form-floating mb-3'>
+                <textarea
+                  className='form-control'
+                  placeholder=''
+                  id='floatingDescription'
+                  value={description}
+                  onInput={(e) => setDescription(e.target.value)}
+                  required
+                />
+                <label htmlFor='floatingDescription'>Description</label>
+              </div>
+              <div className='form-floating mb-3'>
+                <textarea
+                  className='form-control'
+                  placeholder=''
+                  id='floatingMeasures'
+                  value={measures}
+                  onInput={(e) => setMeasures(e.target.value)}
+                />
+                <label htmlFor='floatingMeasures'>Measures (optional)</label>
+              </div>
+            </div>
+            <div className='modal-footer'>
+              <button
+                type='button'
+                className='btn btn-secondary'
+                data-bs-dismiss='modal'
+              >
+                Cancel
+              </button>
+              <button
+                type='button'
+                className='btn btn-secondary'
+                onClick={handleFormReset}
+              >
+                Reset
+              </button>
+              <button
+                type='submit'
+                className='btn btn-primary'
+                data-bs-dismiss='modal'
+              >
+                Update
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   )
 }
 

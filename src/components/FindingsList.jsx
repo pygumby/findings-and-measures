@@ -4,7 +4,6 @@ import FindingItem from './FindingItem'
 const FindingsList = ({
   currentUsername,
   findings,
-  setFindingBeingUpdated,
   updateFinding,
   deleteFinding,
 }) => {
@@ -21,7 +20,6 @@ const FindingsList = ({
             key={finding.id}
             currentUsername={currentUsername}
             finding={finding}
-            setFindingBeingUpdated={setFindingBeingUpdated}
             updateFinding={updateFinding}
             deleteFinding={deleteFinding}
           />

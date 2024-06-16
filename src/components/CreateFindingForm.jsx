@@ -13,9 +13,9 @@ const CreateFindingForm = ({ currentUsername, createFinding }) => {
     createFinding({
       id: timestamp,
       changelog: [{ timestamp, username: currentUsername }],
-      summary,
-      description,
-      measures,
+      summary: summary.trim() === '' ? 'tbd' : summary,
+      description: description.trim() === '' ? 'tbd' : description,
+      measures: measures.trim() === '' ? 'tbd' : measures,
     })
 
     setSummary('')
@@ -58,9 +58,8 @@ const CreateFindingForm = ({ currentUsername, createFinding }) => {
               id='floatingMeasures'
               value={measures}
               onInput={(e) => setMeasures(e.target.value)}
-              required
             />
-            <label htmlFor='floatingMeasures'>Measures</label>
+            <label htmlFor='floatingMeasures'>Measures (optional)</label>
           </div>
           <div className='d-grid'>
             <button className='btn btn-primary' type='submit'>
