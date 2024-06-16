@@ -12,6 +12,6 @@ pnpm run dev
 ## Run Docker container
 
 ```
-docker image build --tag findings-and-measures:latest .
-docker container run --detach --publish 5173:5173 --name findings-and-measures findings-and-measures:latest
+docker image build --tag findings-and-measures .
+docker container run --publish 5173:5173 findings-and-measures
 ```
