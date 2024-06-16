@@ -112,7 +112,7 @@ function App() {
               role='alert'
             >
               <div className='mb-2'>
-                <strong>Stay in the loop!</strong> The following findings have
+                <strong>Stay in the loop!</strong> These findings have
                 been updated since you last worked on them:
               </div>
               <ul className='mb-0'>
