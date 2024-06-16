@@ -14,25 +14,45 @@ const LoginForm = ({ login }) => {
   }
 
   return (
-    <form onSubmit={handleFormSubmit}>
-      <label htmlFor='username'>Username</label>
-      <input
-        type='text'
-        name='username'
-        value={username}
-        onInput={(e) => setUsername(e.target.value)}
-        required
-      />
-      <label htmlFor='password'>Password</label>
-      <input
-        type='password'
-        name='password'
-        value={password}
-        onInput={(e) => setPassword(e.target.value)}
-        required
-      />
-      <button type='submit'>Login</button>
-    </form>
+    <div className='card text-center'>
+      <h6 className='card-header p-3'>Login</h6>
+      <div className='card-body'>
+        <form onSubmit={handleFormSubmit}>
+          <div className='form-floating mb-3'>
+            <input
+              id='floatingUsername'
+              className='form-control'
+              placeholder=''
+              type='text'
+              value={username}
+              onInput={(e) => setUsername(e.target.value)}
+              required
+            />
+            <label htmlFor='floatingUsername'>User name</label>
+          </div>
+          <div className='form-floating mb-3'>
+            <input
+              id='floatingPassword'
+              className='form-control'
+              placeholder=''
+              type='password'
+              value={password}
+              onInput={(e) => setPassword(e.target.value)}
+              required
+            />
+            <label htmlFor='floatingPassword'>Password</label>
+          </div>
+          <div className='d-grid'>
+            <button className='btn btn-primary mb-3' type='submit'>
+              Login
+            </button>
+            <button className='btn btn-primary mb-3' type='submit' disabled>
+              Login via ESCB IAM
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   )
 }
 

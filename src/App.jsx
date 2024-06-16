@@ -7,6 +7,7 @@ import CreateFindingForm from './components/CreateFindingForm'
 import UpdateFindingForm from './components/UpdateFindingForm'
 import FindingsList from './components/FindingsList'
 import useLocalStorage from './hooks/useLocalStorage'
+import { getDateString, getTimeString } from './util/helperFunctions'
 
 function App() {
   const [findings, setFindings] = useLocalStorage(
@@ -62,17 +63,33 @@ function App() {
   })
 
   return (
-    <div>
-      <h1>Findings & Measures</h1>
-
-      {currentUsername ? (
-        <div>
-          <p>Logged in as {currentUsername}.</p>
-          <button onClick={logout}>Logout</button>
+    <div className='container'>
+      <nav className='navbar navbar-light bg-light mb-2'>
+        <div className='container-fluid'>
+          <a className='navbar-brand' href='#'>
+            <img
+              src='/icon.svg'
+              width='30'
+              height='24'
+              className='d-inline-block align-text-top me-3'
+            />
+            Findings & Measures
+          </a>
+          {currentUsername && (
+            <div className='navbar-text py-0'>
+              <span className='me-2'>Welcome, {currentUsername}.</span>
+              <button
+                className='btn btn-link align-baseline p-0'
+                onClick={logout}
+              >
+                Logout
+              </button>
+            </div>
+          )}
         </div>
-      ) : (
-        <LoginForm login={login} />
-      )}
+      </nav>
+
+      {!currentUsername && <LoginForm login={login} />}
 
       {currentUsername && (
         <div>
@@ -90,18 +107,36 @@ function App() {
           )}
 
           {findingsUpdatedByAnotherUser.length > 0 && (
-            <div>
-              <p>
-                The following findings have been updated since you last worked
-                on them:
-              </p>
-              <ul>
-                {findingsUpdatedByAnotherUser.map((finding) => (
-                  <li key={finding.id}>
-                    <a href={`#${finding.id}`}>{finding.summary}</a>
-                  </li>
-                ))}
+            <div
+              className='alert alert-primary alert-dismissible fade show'
+              role='alert'
+            >
+              <div className='mb-2'>
+                <strong>Stay in the loop!</strong> The following findings have
+                been updated since you last worked on them:
+              </div>
+              <ul className='mb-0'>
+                {findingsUpdatedByAnotherUser.map((finding) => {
+                  const lastUpdateUsername =
+                    finding.changelog[finding.changelog.length - 1].username
+                  const lastUpdateTimestamp =
+                    finding.changelog[finding.changelog.length - 1].timestamp
+                  return (
+                    <li key={finding.id}>
+                      <a href={`#${finding.id}`}>{finding.summary}</a> was last
+                      updated by {lastUpdateUsername} on{' '}
+                      {getDateString(lastUpdateTimestamp)} at{' '}
+                      {getTimeString(lastUpdateTimestamp)}.
+                    </li>
+                  )
+                })}
               </ul>
+              <button
+                type='button'
+                className='btn-close'
+                data-bs-dismiss='alert'
+                aria-label='Close'
+              ></button>
             </div>
           )}
 
@@ -114,6 +149,12 @@ function App() {
           />
         </div>
       )}
+
+      <footer className='footer my-3'>
+        <span className='text-muted'>
+          Built for demonstational purposes by Lucas Konstantin Bärenfänger.
+        </span>
+      </footer>
     </div>
   )
 }

@@ -1,8 +1,7 @@
 export const getDateString = (timestamp) => {
-  const date = new Date(timestamp)
+  return new Date(timestamp).toLocaleDateString('en-GB')
+}
 
-  const dateString = date.toLocaleDateString('en-GB')
-  const timeString = date.toLocaleTimeString('en-GB')
-
-  return `${dateString} ${timeString}`
+export const getTimeString = (timestamp) => {
+  return new Date(timestamp).toLocaleTimeString('en-GB')
 }

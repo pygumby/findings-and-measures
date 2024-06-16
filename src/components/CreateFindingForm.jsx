@@ -24,30 +24,52 @@ const CreateFindingForm = ({ currentUsername, createFinding }) => {
   }
 
   return (
-    <form onSubmit={handleFormSubmit}>
-      <label htmlFor='summary'>Summary*</label>
-      <input
-        type='text'
-        name='summary'
-        value={summary}
-        onInput={(e) => setSummary(e.target.value)}
-        required
-      />
-      <label htmlFor='description'>Description*</label>
-      <textarea
-        name='description'
-        value={description}
-        onInput={(e) => setDescription(e.target.value)}
-        required
-      />
-      <label htmlFor='measures'>Measures</label>
-      <textarea
-        name='measures'
-        value={measures}
-        onInput={(e) => setMeasures(e.target.value)}
-      />
-      <button type='submit'>Create</button>
-    </form>
+    <div className='card text-center mb-3'>
+      <h6 className='card-header p-3'>Create a new finding</h6>
+      <div className='card-body'>
+        <form onSubmit={handleFormSubmit}>
+          <div className='form-floating mb-3'>
+            <input
+              className='form-control'
+              id='floatingSummary'
+              placeholder=''
+              type='text'
+              value={summary}
+              onInput={(e) => setSummary(e.target.value)}
+              required
+            />
+            <label htmlFor='floatingSummary'>Summary</label>
+          </div>
+          <div className='form-floating mb-3'>
+            <textarea
+              className='form-control'
+              placeholder=''
+              id='floatingDescription'
+              value={description}
+              onInput={(e) => setDescription(e.target.value)}
+              required
+            />
+            <label htmlFor='floatingDescription'>Description</label>
+          </div>
+          <div className='form-floating mb-3'>
+            <textarea
+              className='form-control'
+              placeholder=''
+              id='floatingMeasures'
+              value={measures}
+              onInput={(e) => setMeasures(e.target.value)}
+              required
+            />
+            <label htmlFor='floatingMeasures'>Measures</label>
+          </div>
+          <div className='d-grid'>
+            <button className='btn btn-primary' type='submit'>
+              Create
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
   )
 }
 

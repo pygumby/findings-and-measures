@@ -9,7 +9,7 @@ const FindingsList = ({
   deleteFinding,
 }) => {
   return (
-    <div>
+    <div className='accordion' id='accordionFindings'>
       {findings
         .sort(
           (a, b) =>

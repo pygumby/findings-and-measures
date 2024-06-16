@@ -37,7 +37,7 @@ const UpdateFindingForm = ({
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <label htmlFor='summary'>Summary*</label>
+      <label htmlFor='summary'>Summary</label>
       <input
         type='text'
         name='summary'
@@ -45,7 +45,7 @@ const UpdateFindingForm = ({
         onInput={(e) => setSummary(e.target.value)}
         required
       />
-      <label htmlFor='description'>Description*</label>
+      <label htmlFor='description'>Description</label>
       <textarea
         name='description'
         value={description}
@@ -57,6 +57,7 @@ const UpdateFindingForm = ({
         name='measures'
         value={measures}
         onInput={(e) => setMeasures(e.target.value)}
+        required
       />
       <button type='submit'>Update</button>
     </form>
