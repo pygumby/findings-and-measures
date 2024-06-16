@@ -1,5 +1,5 @@
 # findings-and-measures
-The Findings &amp; Measures app enables supervisors to manage banks' incompliances
+The Findings & Measures app enables supervisors to manage incompliances of supervised entities
 
 ## Run locally
 ````
