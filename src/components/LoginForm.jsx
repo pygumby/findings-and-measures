@@ -46,7 +46,7 @@ const LoginForm = ({ login }) => {
             <button className='btn btn-primary mb-3' type='submit'>
               Login
             </button>
-            <button className='btn btn-primary mb-3' type='submit' disabled>
+            <button className='btn btn-primary' type='submit' disabled>
               Login via ESCB IAM
             </button>
           </div>
