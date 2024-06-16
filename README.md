@@ -7,7 +7,7 @@ pnpm install
 pnpm run dev
 ````
 
-## Run Docker containe`
+## Run Docker container
 ````
 docker image build -t findings-and-measures:latest .
 docker run --name findings-and-measures findings-and-measures:latest
