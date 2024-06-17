@@ -10,12 +10,26 @@ const CreateFindingForm = ({ currentUsername, createFinding }) => {
     e.preventDefault()
 
     const timestamp = Date.now()
+    const summaryEscaped = summary.trim() === '' ? 'tbd' : summary
+    const descriptionEscaped = description.trim() === '' ? 'tbd' : description
+    const measuresEscaped = measures.trim() === '' ? 'tbd' : measures
+
     createFinding({
       id: timestamp,
-      changelog: [{ timestamp, username: currentUsername }],
-      summary: summary.trim() === '' ? 'tbd' : summary,
-      description: description.trim() === '' ? 'tbd' : description,
-      measures: measures.trim() === '' ? 'tbd' : measures,
+      changelog: [
+        {
+          timestamp,
+          username: currentUsername,
+          version: {
+            summary: summaryEscaped,
+            description: descriptionEscaped,
+            measures: measuresEscaped,
+          },
+        },
+      ],
+      summary: summaryEscaped,
+      description: descriptionEscaped,
+      measures: measuresEscaped,
     })
 
     setSummary('')

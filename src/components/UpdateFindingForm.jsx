@@ -10,6 +10,10 @@ const UpdateFindingForm = ({ currentUsername, finding, updateFinding }) => {
     e.preventDefault()
 
     const timestamp = Date.now()
+    const summaryEscaped = summary.trim() === '' ? 'tbd' : summary
+    const descriptionEscaped = description.trim() === '' ? 'tbd' : description
+    const measuresEscaped = measures.trim() === '' ? 'tbd' : measures
+
     updateFinding({
       id: finding.id,
       changelog: [
@@ -17,11 +21,16 @@ const UpdateFindingForm = ({ currentUsername, finding, updateFinding }) => {
         {
           timestamp,
           username: currentUsername,
+          version: {
+            summary: summaryEscaped,
+            description: descriptionEscaped,
+            measures: measuresEscaped,
+          },
         },
       ],
-      summary: summary.trim() === '' ? 'tbd' : summary,
-      description: description.trim() === '' ? 'tbd' : description,
-      measures: measures.trim() === '' ? 'tbd' : measures,
+      summary: summaryEscaped,
+      description: descriptionEscaped,
+      measures: measuresEscaped,
     })
   }
 

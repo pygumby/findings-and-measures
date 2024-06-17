@@ -45,18 +45,80 @@ const FindingItem = ({
             <dd className='col-sm-9'>{finding.description}</dd>
             <dt className='col-sm-3'>Measures</dt>
             <dd className='col-sm-9'>{finding.measures}</dd>
-            <dt className='col-sm-3 text-muted'>Changelog</dt>
-            <dd className='col-sm-9 text-muted'>
+            <dt className='col-sm-3'>Changelog</dt>
+            <dd className='col-sm-9'>
               <p>
                 {finding.changelog
                   .toSorted((a, b) => b.timestamp - a.timestamp)
-                  .map((change) => (
-                    <span className='font-monospace' key={change['timestamp']}>
-                      {getDateString(change['timestamp'])}{' '}
-                      {getTimeString(change['timestamp'])}, {change['username']}
-                      <br />
-                    </span>
-                  ))}
+                  .map((change, index) => {
+                    const version = finding.changelog.length - 1 - index
+                    return (
+                      <div key={change['timestamp']}>
+                        <button
+                          className='btn btn-link align-baseline p-0'
+                          data-bs-toggle='modal'
+                          data-bs-target={`#version-${finding.id}-${version}-modal`}
+                        >
+                          Version {version}
+                        </button>
+                        , {getDateString(change['timestamp'])}{' '}
+                        {getTimeString(change['timestamp'])},{' '}
+                        {change['username']}
+                        <br />
+                        <div
+                          className='modal fade'
+                          id={`version-${finding.id}-${version}-modal`}
+                          tabIndex='-1'
+                          aria-labelledby={`#version-${finding.id}-${version}-modal-label`}
+                          aria-hidden='true'
+                        >
+                          <div className='modal-dialog'>
+                            <div className='modal-content'>
+                              <div className='modal-header'>
+                                <h1
+                                  className='modal-title fs-5'
+                                  id={`version-${finding.id}-${version}-modal`}
+                                >
+                                  Version {version}
+                                </h1>
+                                <button
+                                  type='button'
+                                  className='btn-close'
+                                  data-bs-dismiss='modal'
+                                  aria-label='Close'
+                                ></button>
+                              </div>
+                              <div className='modal-body'>
+                                <dl className='row mb-0'>
+                                  <dt className='col-sm-3'>Summary</dt>
+                                  <dd className='col-sm-9'>
+                                    {change['version'].summary}
+                                  </dd>
+                                  <dt className='col-sm-3'>Description</dt>
+                                  <dd className='col-sm-9'>
+                                    {change['version'].description}
+                                  </dd>
+                                  <dt className='col-sm-3'>Measures</dt>
+                                  <dd className='col-sm-9'>
+                                    {change['version'].measures}
+                                  </dd>
+                                </dl>
+                              </div>
+                              <div className='modal-footer'>
+                                <button
+                                  type='button'
+                                  className='btn btn-secondary'
+                                  data-bs-dismiss='modal'
+                                >
+                                  Cancel
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )
+                  })}
               </p>
             </dd>
           </dl>
