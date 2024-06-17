@@ -176,9 +176,6 @@ const FindingItem = ({
             </div>
             <div className='modal-body'>
               <p>Are you sure you want to delete this finding?</p>
-              <p>
-                <strong>{finding.summary}</strong>
-              </p>
             </div>
             <div className='modal-footer'>
               <button
