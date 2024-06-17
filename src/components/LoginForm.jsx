@@ -14,8 +14,8 @@ const LoginForm = ({ login }) => {
   }
 
   return (
-    <div className='card text-center'>
-      <h6 className='card-header p-3'>Login</h6>
+    <div className='card'>
+      <h6 className='card-header text-center p-3'>Login</h6>
       <div className='card-body'>
         <form onSubmit={handleFormSubmit}>
           <div className='form-floating mb-3'>

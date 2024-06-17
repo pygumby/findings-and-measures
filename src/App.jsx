@@ -88,11 +88,6 @@ function App() {
 
       {currentUsername && (
         <div>
-          <CreateFindingForm
-            currentUsername={currentUsername}
-            createFinding={createFinding}
-          />
-
           {findingsUpdatedByAnotherUser.length > 0 && (
             <div
               className='alert alert-primary alert-dismissible fade show'
@@ -126,6 +121,11 @@ function App() {
               ></button>
             </div>
           )}
+
+          <CreateFindingForm
+            currentUsername={currentUsername}
+            createFinding={createFinding}
+          />
 
           <FindingsList
             currentUsername={currentUsername}

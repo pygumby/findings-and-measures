@@ -53,7 +53,7 @@ const FindingItem = ({
             <dd className='col-sm-9'>{finding.description}</dd>
             <dt className='col-sm-3'>Measures</dt>
             <dd className='col-sm-9'>{finding.measures}</dd>
-            <dt className='col-sm-3 mb-0'>Changelog</dt>
+            <dt className='col-sm-3 text-muted mb-0'>Changelog</dt>
             <dd className='col-sm-9 mb-0'>
               {finding.changelog
                 .toSorted((a, b) => b.timestamp - a.timestamp)
@@ -62,9 +62,9 @@ const FindingItem = ({
                   const versionPadded = ('000' + version).slice(-3)
                   return (
                     <div key={change['timestamp']}>
-                      <small className='font-monospace'>
+                      <span className='font-monospace text-muted'>
                         <button
-                          className='btn btn-link align-baseline p-0'
+                          className='btn btn-link link-secondary align-baseline p-0'
                           data-bs-toggle='modal'
                           data-bs-target={`#version-${finding.id}-${version}-modal`}
                         >
@@ -74,7 +74,7 @@ const FindingItem = ({
                         {getTimeString(change['timestamp'])},{' '}
                         {change['username']}
                         <br />
-                      </small>
+                      </span>
                       <div
                         className='modal fade'
                         id={`version-${finding.id}-${version}-modal`}
@@ -139,24 +139,18 @@ const FindingItem = ({
           </dl>
           <div className='d-grid'>
             <button
-              className='btn btn-light mb-2'
+              className='btn btn-light mb-3'
               data-bs-toggle='modal'
               data-bs-target={`#update-${finding.id}-modal`}
             >
               Update
             </button>
             <button
-              className='btn btn-light mb-2'
+              className='btn btn-light'
               data-bs-toggle='modal'
               data-bs-target={`#delete-${finding.id}-modal`}
             >
               Delete
-            </button>
-            <button className='btn btn-light mb-2' disabled>
-              Download .docx
-            </button>
-            <button className='btn btn-light' disabled>
-              Send .docx to DARWIN
             </button>
           </div>
           <UpdateFindingForm
