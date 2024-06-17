@@ -94,8 +94,7 @@ function App() {
               role='alert'
             >
               <div className='mb-2'>
-                <strong>Stay in the loop!</strong> These findings have been
-                updated since you last worked on them:
+                These findings have been updated since you last worked on them:
               </div>
               <ul className='mb-0'>
                 {findingsUpdatedByAnotherUser.map((finding) => {

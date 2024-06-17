@@ -86,15 +86,15 @@ const UpdateFindingForm = ({ currentUsername, finding, updateFinding }) => {
                 required
               >
                 <option value=''>Institution</option>
-                <option value='hsbc'>{getInstitutionName('hsbc')}</option>
                 <option value='bnp'>{getInstitutionName('bnp')}</option>
-                <option value='santander'>
-                  {getInstitutionName('santander')}
-                </option>
                 <option value='deutsche'>
                   {getInstitutionName('deutsche')}
                 </option>
+                <option value='hsbc'>{getInstitutionName('hsbc')}</option>
                 <option value='ing'>{getInstitutionName('ing')}</option>
+                <option value='santander'>
+                  {getInstitutionName('santander')}
+                </option>
               </select>
               <div className='form-floating mb-3'>
                 <input

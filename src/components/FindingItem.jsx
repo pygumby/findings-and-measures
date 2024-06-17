@@ -11,6 +11,7 @@ const FindingItem = ({
   finding,
   updateFinding,
   deleteFinding,
+  accordionId,
 }) => {
   return (
     <div className='accordion-item' id={finding.id}>
@@ -39,7 +40,7 @@ const FindingItem = ({
         id={`collapse-${finding.id}`}
         className={'accordion-collapse collapse'}
         aria-labelledby={`heading-${finding.id}`}
-        data-bs-parent='#accordionFindings'
+        data-bs-parent={`#${accordionId}`}
       >
         <div className='accordion-body'>
           <dl className='row mb-3'>
