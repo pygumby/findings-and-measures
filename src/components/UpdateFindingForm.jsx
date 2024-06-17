@@ -1,7 +1,11 @@
 // React
 import { useState } from 'react'
 
+// Custom
+import { getInstitutionName } from '../util/helperFunctions'
+
 const UpdateFindingForm = ({ currentUsername, finding, updateFinding }) => {
+  const [institution, setInstitution] = useState(finding.institution)
   const [summary, setSummary] = useState(finding.summary)
   const [description, setDescription] = useState(finding.description)
   const [measures, setMeasures] = useState(finding.measures)
@@ -16,21 +20,23 @@ const UpdateFindingForm = ({ currentUsername, finding, updateFinding }) => {
 
     updateFinding({
       id: finding.id,
+      institution,
+      summary: summaryEscaped,
+      description: descriptionEscaped,
+      measures: measuresEscaped,
       changelog: [
         ...finding.changelog,
         {
           timestamp,
           username: currentUsername,
           version: {
+            institution,
             summary: summaryEscaped,
             description: descriptionEscaped,
             measures: measuresEscaped,
           },
         },
       ],
-      summary: summaryEscaped,
-      description: descriptionEscaped,
-      measures: measuresEscaped,
     })
   }
 
@@ -68,6 +74,23 @@ const UpdateFindingForm = ({ currentUsername, finding, updateFinding }) => {
               ></button>
             </div>
             <div className='modal-body'>
+              <select
+                className='form-select mb-3'
+                value={institution}
+                onChange={(e) => setInstitution(e.target.value)}
+                required
+              >
+                <option value=''>Institution</option>
+                <option value='hsbc'>{getInstitutionName('hsbc')}</option>
+                <option value='bnp'>{getInstitutionName('bnp')}</option>
+                <option value='santander'>
+                  {getInstitutionName('santander')}
+                </option>
+                <option value='deutsche'>
+                  {getInstitutionName('deutsche')}
+                </option>
+                <option value='ing'>{getInstitutionName('ing')}</option>
+              </select>
               <div className='form-floating mb-3'>
                 <input
                   className='form-control'

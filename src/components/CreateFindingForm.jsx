@@ -1,7 +1,11 @@
 // React
 import { useState } from 'react'
 
+// Custom
+import { getInstitutionName } from '../util/helperFunctions'
+
 const CreateFindingForm = ({ currentUsername, createFinding }) => {
+  const [institution, setInstitution] = useState('')
   const [summary, setSummary] = useState('')
   const [description, setDescription] = useState('')
   const [measures, setMeasures] = useState('')
@@ -16,22 +20,25 @@ const CreateFindingForm = ({ currentUsername, createFinding }) => {
 
     createFinding({
       id: timestamp,
+      institution,
+      summary: summaryEscaped,
+      description: descriptionEscaped,
+      measures: measuresEscaped,
       changelog: [
         {
           timestamp,
           username: currentUsername,
           version: {
+            institution,
             summary: summaryEscaped,
             description: descriptionEscaped,
             measures: measuresEscaped,
           },
         },
       ],
-      summary: summaryEscaped,
-      description: descriptionEscaped,
-      measures: measuresEscaped,
     })
 
+    setInstitution('')
     setSummary('')
     setDescription('')
     setMeasures('')
@@ -42,6 +49,19 @@ const CreateFindingForm = ({ currentUsername, createFinding }) => {
       <h6 className='card-header p-3'>Create new finding</h6>
       <div className='card-body'>
         <form onSubmit={handleFormSubmit}>
+          <select
+            className='form-select mb-3'
+            value={institution}
+            onChange={(e) => setInstitution(e.target.value)}
+            required
+          >
+            <option value=''>Institution</option>
+            <option value='hsbc'>{getInstitutionName('hsbc')}</option>
+            <option value='bnp'>{getInstitutionName('bnp')}</option>
+            <option value='santander'>{getInstitutionName('santander')}</option>
+            <option value='deutsche'>{getInstitutionName('deutsche')}</option>
+            <option value='ing'>{getInstitutionName('ing')}</option>
+          </select>
           <div className='form-floating mb-3'>
             <input
               className='form-control'

@@ -1,6 +1,10 @@
 // Custom
 import UpdateFindingForm from './UpdateFindingForm'
-import { getDateString, getTimeString } from '../util/helperFunctions'
+import {
+  getDateString,
+  getTimeString,
+  getInstitutionName,
+} from '../util/helperFunctions'
 
 const FindingItem = ({
   currentUsername,
@@ -39,6 +43,10 @@ const FindingItem = ({
       >
         <div className='accordion-body'>
           <dl className='row mb-0'>
+            <dt className='col-sm-3'>Institution</dt>
+            <dd className='col-sm-9'>
+              {getInstitutionName(finding.institution)}
+            </dd>
             <dt className='col-sm-3'>Summary</dt>
             <dd className='col-sm-9'>{finding.summary}</dd>
             <dt className='col-sm-3'>Description</dt>
@@ -90,6 +98,12 @@ const FindingItem = ({
                               </div>
                               <div className='modal-body'>
                                 <dl className='row mb-0'>
+                                  <dt className='col-sm-3'>Institution</dt>
+                                  <dd className='col-sm-9'>
+                                    {getInstitutionName(
+                                      change['version'].institution
+                                    )}
+                                  </dd>
                                   <dt className='col-sm-3'>Summary</dt>
                                   <dd className='col-sm-9'>
                                     {change['version'].summary}
