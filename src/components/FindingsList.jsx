@@ -13,7 +13,9 @@ const FindingsList = ({
       <h6 className='card-header text-center p-3'>View and update findings</h6>
       <div className='card-body pb-0'>
         {findings.length === 0 ? (
-          <span className='text-muted'>No findings have been created yet.</span>
+          <div className='text-muted mb-3'>
+            No findings have been created yet.
+          </div>
         ) : (
           Array.from(new Set(findings.map((finding) => finding.institution)))
             .toSorted()
