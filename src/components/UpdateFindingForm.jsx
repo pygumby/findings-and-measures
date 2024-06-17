@@ -6,7 +6,7 @@ import { getInstitutionName } from '../util/helperFunctions'
 
 const UpdateFindingForm = ({ currentUsername, finding, updateFinding }) => {
   const [institution, setInstitution] = useState(finding.institution)
-  const [summary, setSummary] = useState(finding.summary)
+  const [title, setTitle] = useState(finding.title)
   const [description, setDescription] = useState(finding.description)
   const [measures, setMeasures] = useState(finding.measures)
 
@@ -14,14 +14,14 @@ const UpdateFindingForm = ({ currentUsername, finding, updateFinding }) => {
     e.preventDefault()
 
     const timestamp = Date.now()
-    const summaryEscaped = summary.trim() === '' ? 'tbd' : summary
+    const titleEscaped = title.trim() === '' ? 'tbd' : title
     const descriptionEscaped = description.trim() === '' ? 'tbd' : description
     const measuresEscaped = measures.trim() === '' ? 'tbd' : measures
 
     updateFinding({
       id: finding.id,
       institution,
-      summary: summaryEscaped,
+      title: titleEscaped,
       description: descriptionEscaped,
       measures: measuresEscaped,
       changelog: [
@@ -31,19 +31,24 @@ const UpdateFindingForm = ({ currentUsername, finding, updateFinding }) => {
           username: currentUsername,
           version: {
             institution,
-            summary: summaryEscaped,
+            title: titleEscaped,
             description: descriptionEscaped,
             measures: measuresEscaped,
           },
         },
       ],
     })
+
+    setInstitution(finding.institution)
+    setTitle(finding.title)
+    setDescription(finding.description)
+    setMeasures(finding.measures)
   }
 
   const handleFormReset = (e) => {
     e.preventDefault()
 
-    setSummary(finding.summary)
+    setTitle(finding.title)
     setDescription(finding.description)
     setMeasures(finding.measures)
   }
@@ -94,14 +99,14 @@ const UpdateFindingForm = ({ currentUsername, finding, updateFinding }) => {
               <div className='form-floating mb-3'>
                 <input
                   className='form-control'
-                  id='floatingSummary'
+                  id='floatingTitle'
                   placeholder=''
                   type='text'
-                  value={summary}
-                  onInput={(e) => setSummary(e.target.value)}
+                  value={title}
+                  onInput={(e) => setTitle(e.target.value)}
                   required
                 />
-                <label htmlFor='floatingSummary'>Summary</label>
+                <label htmlFor='floatingTitle'>Title</label>
               </div>
               <div className='form-floating mb-3'>
                 <textarea
@@ -110,9 +115,10 @@ const UpdateFindingForm = ({ currentUsername, finding, updateFinding }) => {
                   id='floatingDescription'
                   value={description}
                   onInput={(e) => setDescription(e.target.value)}
-                  required
                 />
-                <label htmlFor='floatingDescription'>Description</label>
+                <label htmlFor='floatingDescription'>
+                  Description (optional)
+                </label>
               </div>
               <div className='form-floating mb-3'>
                 <textarea

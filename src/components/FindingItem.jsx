@@ -23,7 +23,7 @@ const FindingItem = ({
           aria-expanded='false'
           aria-controls={`collapse-${finding.id}`}
         >
-          {finding.summary}
+          {finding.title}
           {finding.changelog.some(
             (change) => change.username === currentUsername
           ) &&
@@ -47,8 +47,8 @@ const FindingItem = ({
             <dd className='col-sm-9'>
               {getInstitutionName(finding.institution)}
             </dd>
-            <dt className='col-sm-3'>Summary</dt>
-            <dd className='col-sm-9'>{finding.summary}</dd>
+            <dt className='col-sm-3'>Title</dt>
+            <dd className='col-sm-9'>{finding.title}</dd>
             <dt className='col-sm-3'>Description</dt>
             <dd className='col-sm-9'>{finding.description}</dd>
             <dt className='col-sm-3'>Measures</dt>
@@ -106,9 +106,9 @@ const FindingItem = ({
                                     change['version'].institution
                                   )}
                                 </dd>
-                                <dt className='col-sm-3'>Summary</dt>
+                                <dt className='col-sm-3'>Title</dt>
                                 <dd className='col-sm-9'>
-                                  {change['version'].summary}
+                                  {change['version'].title}
                                 </dd>
                                 <dt className='col-sm-3'>Description</dt>
                                 <dd className='col-sm-9'>

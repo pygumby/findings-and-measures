@@ -6,42 +6,39 @@ import { getInstitutionName } from '../util/helperFunctions'
 
 const CreateFindingForm = ({ currentUsername, createFinding }) => {
   const [institution, setInstitution] = useState('')
-  const [summary, setSummary] = useState('')
+  const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [measures, setMeasures] = useState('')
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
 
     const timestamp = Date.now()
-    const summaryEscaped = summary.trim() === '' ? 'tbd' : summary
+    const titleEscaped = title.trim() === '' ? 'tbd' : title
     const descriptionEscaped = description.trim() === '' ? 'tbd' : description
-    const measuresEscaped = measures.trim() === '' ? 'tbd' : measures
 
     createFinding({
       id: timestamp,
       institution,
-      summary: summaryEscaped,
+      title: titleEscaped,
       description: descriptionEscaped,
-      measures: measuresEscaped,
+      measures: 'tbd',
       changelog: [
         {
           timestamp,
           username: currentUsername,
           version: {
             institution,
-            summary: summaryEscaped,
+            title: titleEscaped,
             description: descriptionEscaped,
-            measures: measuresEscaped,
+            measures: 'tbd',
           },
         },
       ],
     })
 
     setInstitution('')
-    setSummary('')
+    setTitle('')
     setDescription('')
-    setMeasures('')
   }
 
   return (
@@ -65,14 +62,14 @@ const CreateFindingForm = ({ currentUsername, createFinding }) => {
           <div className='form-floating mb-3'>
             <input
               className='form-control'
-              id='floatingSummary'
+              id='floatingTitle'
               placeholder=''
               type='text'
-              value={summary}
-              onInput={(e) => setSummary(e.target.value)}
+              value={title}
+              onInput={(e) => setTitle(e.target.value)}
               required
             />
-            <label htmlFor='floatingSummary'>Summary</label>
+            <label htmlFor='floatingTitle'>Title</label>
           </div>
           <div className='form-floating mb-3'>
             <textarea
@@ -81,19 +78,8 @@ const CreateFindingForm = ({ currentUsername, createFinding }) => {
               id='floatingDescription'
               value={description}
               onInput={(e) => setDescription(e.target.value)}
-              required
             />
-            <label htmlFor='floatingDescription'>Description</label>
-          </div>
-          <div className='form-floating mb-3'>
-            <textarea
-              className='form-control'
-              placeholder=''
-              id='floatingMeasures'
-              value={measures}
-              onInput={(e) => setMeasures(e.target.value)}
-            />
-            <label htmlFor='floatingMeasures'>Measures (optional)</label>
+            <label htmlFor='floatingDescription'>Description (optional)</label>
           </div>
           <div className='d-grid'>
             <button className='btn btn-primary' type='submit'>
