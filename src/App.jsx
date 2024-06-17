@@ -110,7 +110,7 @@ function App() {
                     finding.changelog[finding.changelog.length - 1].timestamp
                   return (
                     <li key={finding.id}>
-                      <a href={`#${finding.id}`}>{finding.summary}</a> was last
+                      <a href={`#${finding.id}`}>{finding.title}</a> was last
                       updated by {lastUpdateUsername} on{' '}
                       {getDateString(lastUpdateTimestamp)} at{' '}
                       {getTimeString(lastUpdateTimestamp)}.
